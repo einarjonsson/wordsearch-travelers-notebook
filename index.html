@@ -28,7 +28,7 @@ body {
 header {
   padding: 28px 48px; border-bottom: 1px solid var(--rule);
   display: flex; align-items: center; justify-content: space-between;
-  background: var(--warm-white); position: sticky; top: 0; z-index: 10;
+  background: var(--warm-white); position: sticky; top: 44px; z-index: 10;
   box-shadow: var(--shadow-sm);
 }
 .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; line-height: 1; }
@@ -37,7 +37,7 @@ header {
   font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--muted); border: 1px solid var(--rule); padding: 4px 10px; border-radius: 2px;
 }
-main { display: grid; grid-template-columns: 400px 1fr; min-height: calc(100vh - 73px); }
+main { display: grid; grid-template-columns: 400px 1fr; min-height: calc(100vh - 117px); }
 
 /* Settings panel */
 .settings-panel { border-right: 1px solid var(--rule); background: var(--warm-white); overflow-y: auto; display: flex; flex-direction: column; }
@@ -196,6 +196,12 @@ main { display: grid; grid-template-columns: 400px 1fr; min-height: calc(100vh -
 </style>
 </head>
 <body>
+<div style="position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(245,240,228,0.95);backdrop-filter:blur(8px);border-bottom:1px solid #c8bda0;padding:0 32px;height:44px;display:flex;align-items:center;justify-content:space-between;font-family:'DM Mono',monospace;">
+  <a href="https://einarjonsson.github.io" style="font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:#7a7060;text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.15s;" onmouseover="this.style.color='#7a2e0e'" onmouseout="this.style.color='#7a7060'">
+    ← The Insert Studio
+  </a>
+  <span style="font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:#c8bda0;">Word Search Generator</span>
+</div>
 
 <header>
   <div class="logo">Traveler's <em>Word Search</em></div>
