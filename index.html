@@ -516,7 +516,8 @@ function drawWordSearchPage(doc, puzzle, number, ox, oy, pw, ph, font) {
   const { grid, words } = puzzle;
   const gridSize = grid.length;
   const margin = 5;
-  const wordListH = 22;
+  const isPassport = ph < 110; // passport panels are 98mm tall
+  const wordListH = isPassport ? 18 : 22;
   const titleH = 8;
   const availW = pw - margin * 2;
   const availH = ph - margin * 2 - titleH - wordListH;
@@ -541,7 +542,7 @@ function drawWordSearchPage(doc, puzzle, number, ox, oy, pw, ph, font) {
 
   // Grid letters
   doc.setFont(font, 'normal');
-  const fs = cellSize * 0.52;
+  const fs = cellSize * (isPassport ? 0.62 : 0.52);
   doc.setFontSize(fs);
   doc.setTextColor(20, 20, 20);
   for (let r = 0; r < gridSize; r++) {
@@ -569,21 +570,21 @@ function drawWordSearchPage(doc, puzzle, number, ox, oy, pw, ph, font) {
   // Word list below grid
   const wly = gy + gridH + 4;
   doc.setFont(font, 'bold');
-  doc.setFontSize(4.5);
+  doc.setFontSize(isPassport ? 4 : 4.5);
   doc.setTextColor(100, 100, 100);
   doc.text('FIND:', ox + margin, wly);
 
   doc.setFont(font, 'normal');
-  doc.setFontSize(4.2);
+  doc.setFontSize(isPassport ? 3.8 : 4.2);
   doc.setTextColor(40, 40, 40);
 
-  const cols = 3;
+  const cols = isPassport ? 4 : 3;
   const colW = availW / cols;
   words.forEach((w, i) => {
     const col = i % cols;
     const row = Math.floor(i / cols);
     const wx = ox + margin + col * colW;
-    const wy = wly + 4 + row * 4.5;
+    const wy = wly + 4 + row * (isPassport ? 4 : 4.5);
     doc.text('• ' + w, wx, wy);
   });
 }
@@ -698,7 +699,7 @@ generateBtn.addEventListener('click', async () => {
   const difficulty = getDifficulty(), font = getFont();
   const pages = parseInt(countInput.value) || 1;
   const total = pages * 8;
-  const gridSize = size === 'passport' ? 12 : 14;
+  const gridSize = size === 'passport' ? 10 : 14;
   const wordList = WORDS[category];
 
   generateBtn.disabled = true;
@@ -791,7 +792,7 @@ function updatePreview() {
 
 function drawWSGrid(ctx, ox, oy, pw, ph, scale) {
   const margin = 5*scale, titleH = 8*scale, wordListH = 22*scale;
-  const gridSize = pw < 100*scale ? 12 : 14;
+  const gridSize = pw < 100*scale ? 10 : 14;
   const availW = pw - margin*2, availH = ph - margin*2 - titleH - wordListH;
   const cell = Math.min(availW/gridSize, availH/gridSize);
   const gw = cell*gridSize, gh = cell*gridSize;
